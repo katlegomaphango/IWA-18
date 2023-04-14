@@ -1,3 +1,5 @@
+import { html } from "./view.js";
+
 /**
  * A handler that fires when a user drags over any element inside a column. In
  * order to determine which column the user is dragging over the entire event
@@ -27,16 +29,32 @@ const handleDragOver = (event) => {
     updateDraggingHtml({ over: column })
 }
 
+let isOpen = false
 
 const handleDragStart = (event) => {}
 const handleDragEnd = (event) => {}
-const handleHelpToggle = (event) => {}
+const handleHelpToggle = (event) => {
+    // document.querySelector('.backdrop').style.display = 'block'
+    // html.help.overlay.style.display = 'block'
+
+    isOpen = !isOpen
+    if (isOpen) {
+        document.querySelector('.backdrop').style.display = 'block'
+        html.help.overlay.style.display = 'block'
+    } else {
+        document.querySelector('.backdrop').style.display = 'none'
+        html.help.overlay.style.display = 'none'
+    }
+}
 const handleAddToggle = (event) => {}
 const handleAddSubmit = (event) => {}
 const handleEditToggle = (event) => {}
 const handleEditSubmit = (event) => {}
 const handleDelete = (event) => {}
 
+console.log('hey')
+
+window.addEventListener('onload', () => { console.log('hey'); html.other.add.focus()})
 html.add.cancel.addEventListener('click', handleAddToggle)
 html.other.add.addEventListener('click', handleAddToggle)
 html.add.form.addEventListener('submit', handleAddSubmit)
