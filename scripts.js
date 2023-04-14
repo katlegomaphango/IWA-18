@@ -48,7 +48,21 @@ const handleHelpToggle = (event) => {
 
     checkOverlayAndFocusBtn(html.help.overlay)
 }
-const handleAddToggle = (event) => {}
+const handleAddToggle = (event) => {
+    // document.querySelector('.backdrop').style.display = 'block'
+    // html.add.overlay.style.display = 'block'
+
+    isOpen = !isOpen
+    if (isOpen) {
+        document.querySelector('.backdrop').style.display = 'block'
+        html.add.overlay.style.display = 'block'
+    } else {
+        document.querySelector('.backdrop').style.display = 'none'
+        html.add.overlay.style.display = 'none'
+    }
+
+    checkOverlayAndFocusBtn(html.add.overlay)
+}
 const handleAddSubmit = (event) => {}
 const handleEditToggle = (event) => {}
 const handleEditSubmit = (event) => {}
@@ -62,7 +76,6 @@ const checkOverlayAndFocusBtn = (overlay) => {
 
 console.log('hey')
 
-window.addEventListener('onload', () => { console.log('hey'); html.other.add.focus()})
 html.add.cancel.addEventListener('click', handleAddToggle)
 html.other.add.addEventListener('click', handleAddToggle)
 html.add.form.addEventListener('submit', handleAddSubmit)
