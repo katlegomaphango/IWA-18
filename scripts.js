@@ -63,7 +63,12 @@ const handleAddToggle = (event) => {
 
     checkOverlayAndFocusBtn(html.add.overlay)
 }
-const handleAddSubmit = (event) => {}
+const handleAddSubmit = (event) => {
+    event.preventDefault()
+    const formData = new FormData(event.target)
+    const data = Object.fromEntries(formData)
+    console.log(data)
+}
 const handleEditToggle = (event) => {}
 const handleEditSubmit = (event) => {}
 const handleDelete = (event) => {}
