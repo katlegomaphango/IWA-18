@@ -45,12 +45,20 @@ const handleHelpToggle = (event) => {
         document.querySelector('.backdrop').style.display = 'none'
         html.help.overlay.style.display = 'none'
     }
+
+    checkOverlayAndFocusBtn(html.help.overlay)
 }
 const handleAddToggle = (event) => {}
 const handleAddSubmit = (event) => {}
 const handleEditToggle = (event) => {}
 const handleEditSubmit = (event) => {}
 const handleDelete = (event) => {}
+
+const checkOverlayAndFocusBtn = (overlay) => {
+    if (overlay.style.display === 'none') {
+        html.other.add.focus()
+    }
+}
 
 console.log('hey')
 
