@@ -1,4 +1,4 @@
-import { html } from "./view.js";
+import { html, createOrderHtml } from "./view.js";
 
 /**
  * A handler that fires when a user drags over any element inside a column. In
@@ -64,11 +64,22 @@ const handleAddToggle = (event) => {
     checkOverlayAndFocusBtn(html.add.overlay)
 }
 const handleAddSubmit = (event) => {
+    // const { id, title, table, created } = order
     event.preventDefault()
     const formData = new FormData(event.target)
     const data = Object.fromEntries(formData)
-    console.log(data)
+    const element = createOrderHtml(data)
+    // console.log(element)
+    // console.log(data)
+    // console.log(html.columns)
+    //html.columns.ordered.innerHTML = element
+    html.columns.ordered.appendChild(element)
+    // console.log(html.columns.ordered)
+    event.target.reset()
+    document.querySelector('.backdrop').style.display = 'none'
+    html.add.overlay.style.display = 'none'
 }
+console.log(html.columns.ordered)
 const handleEditToggle = (event) => {}
 const handleEditSubmit = (event) => {}
 const handleDelete = (event) => {}

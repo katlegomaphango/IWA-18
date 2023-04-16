@@ -1,4 +1,4 @@
-import { TABLES, COLUMNS, state } from './data.js'
+import { TABLES, COLUMNS, state, createOrderData } from './data.js'
 
 /**
  * Takes any order as an object literal (as saved in state) and converts it a
@@ -10,6 +10,7 @@ import { TABLES, COLUMNS, state } from './data.js'
  * @returns {HTMLElement}
  */
 export const createOrderHtml = (order) => {
+    order = createOrderData(order)
     const { id, title, table, created } = order
 
     const element = document.createElement('div')
@@ -63,7 +64,7 @@ const createTableOptionsHtml = () => {
 
 /**
  * An object literal that contains references to all the HTML elements
- * referenced through the operation of the app either upon initialisation or
+ * referenced through the operation of the app either upon initialization or
  * while its running (via event listeners). This ensure that all UI elements can
  * be accessed and seen in a structured manner in a single data structure.
  *
