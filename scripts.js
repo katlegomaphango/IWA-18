@@ -79,10 +79,38 @@ const handleAddSubmit = (event) => {
     document.querySelector('.backdrop').style.display = 'none'
     html.add.overlay.style.display = 'none'
 }
-console.log(html.columns.ordered)
-const handleEditToggle = (event) => {}
+const handleEditToggle = (event) => {
+    document.querySelector('.backdrop').style.display = 'block'
+    html.edit.overlay.style.display = 'block'
+    //const formData = new FormData();
+    html.edit.id.dataset.editId = event.srcElement.dataset.id
+    html.edit.title.value =  event.srcElement.querySelector('[data-order-title]').textContent
+    html.edit.table.value = event.srcElement.querySelector('[data-order-table]').textContent
+    // console.log(html.edit.title)
+    // console.log(html.add.title.value)
+    // console.log(event.srcElement.dataset.id)
+    // console.log(event.srcElement)
+    // formData.append('name', 'John');
+    // formData.append('email', 'john@example.com');
+    // for (const [key, value] of formData.entries()) {
+    // console.log(key, value);
+    // }
+    // const data = formData.entries()
+    // console.log(data['name'])
+}
 const handleEditSubmit = (event) => {}
-const handleDelete = (event) => {}
+
+const handleDelete = (event) => {
+    // console.log('delete pressed')
+    // console.log(event.target.parentNode.parentNode)
+    // console.log(event.srcElement.parentNode.parentNode.querySelector(`[data-edit-id="${html.edit.id.dataset.editId}"]`))
+    // html.edit.form.reset()
+    // console.log(html.columns.ordered)
+    html.columns.ordered.removeChild(document.querySelector(`[data-id="${html.edit.id.dataset.editId}"]`))
+
+    document.querySelector('.backdrop').style.display = 'none'
+    html.edit.overlay.style.display = 'none'
+}
 
 const checkOverlayAndFocusBtn = (overlay) => {
     if (overlay.style.display === 'none') {
