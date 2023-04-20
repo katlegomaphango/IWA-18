@@ -80,12 +80,18 @@ const handleAddSubmit = (event) => {
     html.add.overlay.style.display = 'none'
 }
 const handleEditToggle = (event) => {
-    document.querySelector('.backdrop').style.display = 'block'
-    html.edit.overlay.style.display = 'block'
-    //const formData = new FormData();
-    html.edit.id.dataset.editId = event.srcElement.dataset.id
-    html.edit.title.value =  event.srcElement.querySelector('[data-order-title]').textContent
-    html.edit.table.value = event.srcElement.querySelector('[data-order-table]').textContent
+    isOpen = !isOpen
+    if (isOpen) {
+        document.querySelector('.backdrop').style.display = 'block'
+        html.edit.overlay.style.display = 'block'
+        //const formData = new FormData();
+        html.edit.id.dataset.editId = event.srcElement.dataset.id
+        html.edit.title.value =  event.srcElement.querySelector('[data-order-title]').textContent
+        html.edit.table.value = event.srcElement.querySelector('[data-order-table]').textContent
+    } else {
+        document.querySelector('.backdrop').style.display = 'none'
+        html.edit.overlay.style.display = 'none'
+    }
     // console.log(html.edit.title)
     // console.log(html.add.title.value)
     // console.log(event.srcElement.dataset.id)
