@@ -1,4 +1,4 @@
-import { html, createOrderHtml } from "./view.js";
+import { html, createOrderHtml, updateDraggingHtml, moveToColumn } from "./view.js";
 
 let orders = []
 
@@ -169,10 +169,7 @@ const checkOverlayAndFocusBtn = (overlay) => {
 
 console.log('hey')
 
-window.onload = () => {
-    html.other.add.focus()
-}
-
+window.onload = () => html.other.add.focus()
 
 html.add.cancel.addEventListener('click', handleAddToggle)
 html.other.add.addEventListener('click', handleAddToggle)
