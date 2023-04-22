@@ -36,10 +36,8 @@ let isOpen = false
 const handleDragStart = (event) => {}
 const handleDragEnd = (event) => {}
 const handleHelpToggle = (event) => {
-    // document.querySelector('.backdrop').style.display = 'block'
-    // html.help.overlay.style.display = 'block'
-
     isOpen = !isOpen
+
     if (isOpen) {
         document.querySelector('.backdrop').style.display = 'block'
         html.help.overlay.style.display = 'block'
@@ -51,10 +49,8 @@ const handleHelpToggle = (event) => {
     checkOverlayAndFocusBtn(html.help.overlay)
 }
 const handleAddToggle = (event) => {
-    // document.querySelector('.backdrop').style.display = 'block'
-    // html.add.overlay.style.display = 'block'
-
     isOpen = !isOpen
+
     if (isOpen) {
         document.querySelector('.backdrop').style.display = 'block'
         html.add.overlay.style.display = 'block'
@@ -66,60 +62,40 @@ const handleAddToggle = (event) => {
     checkOverlayAndFocusBtn(html.add.overlay)
 }
 const handleAddSubmit = (event) => {
-    // const { id, title, table, created } = order
     event.preventDefault()
+
     const formData = new FormData(event.target)
     const data = Object.fromEntries(formData)
     const element = createOrderHtml(data)
-    // console.log(element)
-    // console.log(data)
-    // console.log(html.columns)
-    //html.columns.ordered.innerHTML = element
+
     orders.push(element)
-    console.log(orders)
-    console.log(element.dataset.id)
     html.columns.ordered.appendChild(element)
-    // console.log(html.columns.ordered)
+
     event.target.reset()
+
     document.querySelector('.backdrop').style.display = 'none'
     html.add.overlay.style.display = 'none'
 }
 const handleEditToggle = (event) => {
     isOpen = !isOpen
+
     if (isOpen) {
         document.querySelector('.backdrop').style.display = 'block'
         html.edit.overlay.style.display = 'block'
+
         const editId = event.srcElement.dataset.id
-        //const formData = new FormData();
-        // html.edit.id.dataset.editId = event.srcElement.dataset.id
-        // html.edit.title.value =  event.srcElement.querySelector('[data-order-title]').textContent
-        // html.edit.table.value = event.srcElement.querySelector('[data-order-table]').textContent
-        console.log('id of order item to edit ', editId)
         const editedObj = orders.find(item => item.dataset.id === editId);
-        console.log('order item to edit ',editedObj)
-        console.log('parent node of order item to edit ',editedObj.parentNode.dataset.column)
+
         html.edit.id.dataset.editId = editedObj.dataset.id
         html.edit.title.value = editedObj.querySelector('[data-order-title]').textContent
         html.edit.table.value = editedObj.querySelector('[data-order-table]').textContent
         html.edit.column.value = editedObj.parentNode.dataset.column
-        // console.log(html.edit.id.dataset.editId)
-
 
     } else {
         document.querySelector('.backdrop').style.display = 'none'
         html.edit.overlay.style.display = 'none'
     }
-    // console.log(html.edit.title)
-    // console.log(html.add.title.value)
-    // console.log(event.srcElement.dataset.id)
-    // console.log(event.srcElement)
-    // formData.append('name', 'John');
-    // formData.append('email', 'john@example.com');
-    // for (const [key, value] of formData.entries()) {
-    // console.log(key, value);
-    // }
-    // const data = formData.entries()
-    // console.log(data['name'])
+
 }
 const handleEditSubmit = (event) => {
     event.preventDefault()
@@ -143,20 +119,16 @@ const handleEditSubmit = (event) => {
     event.target.reset()
     document.querySelector('.backdrop').style.display = 'none'
     html.edit.overlay.style.display = 'none'
-    
+
 }
 const handleDelete = (event) => {
-    // console.log('delete pressed')
-    // console.log(event.target.parentNode.parentNode)
-    // console.log(event.srcElement.parentNode.parentNode.querySelector(`[data-edit-id="${html.edit.id.dataset.editId}"]`))
-    // html.edit.form.reset()
-    // console.log(html.columns.ordered)
     const editId = html.edit.id.dataset.editId
+
     orders = orders.filter( (item) => {
         return item.dataset.id !== editId
     })
-    html.columns.ordered.removeChild(document.querySelector(`[data-id="${editId}"]`))
 
+    html.columns.ordered.removeChild(document.querySelector(`[data-id="${editId}"]`))
 
     document.querySelector('.backdrop').style.display = 'none'
     html.edit.overlay.style.display = 'none'
