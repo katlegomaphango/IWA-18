@@ -1,5 +1,7 @@
 import { html, createOrderHtml } from "./view.js";
 
+let orders = []
+
 /**
  * A handler that fires when a user drags over any element inside a column. In
  * order to determine which column the user is dragging over the entire event
@@ -73,6 +75,9 @@ const handleAddSubmit = (event) => {
     // console.log(data)
     // console.log(html.columns)
     //html.columns.ordered.innerHTML = element
+    orders.push(element)
+    console.log(orders)
+    console.log(element.dataset.id)
     html.columns.ordered.appendChild(element)
     // console.log(html.columns.ordered)
     event.target.reset()
@@ -84,10 +89,22 @@ const handleEditToggle = (event) => {
     if (isOpen) {
         document.querySelector('.backdrop').style.display = 'block'
         html.edit.overlay.style.display = 'block'
+        const editId = event.srcElement.dataset.id
         //const formData = new FormData();
-        html.edit.id.dataset.editId = event.srcElement.dataset.id
-        html.edit.title.value =  event.srcElement.querySelector('[data-order-title]').textContent
-        html.edit.table.value = event.srcElement.querySelector('[data-order-table]').textContent
+        // html.edit.id.dataset.editId = event.srcElement.dataset.id
+        // html.edit.title.value =  event.srcElement.querySelector('[data-order-title]').textContent
+        // html.edit.table.value = event.srcElement.querySelector('[data-order-table]').textContent
+        console.log('id of order item to edit ', editId)
+        const editedObj = orders.find(item => item.dataset.id === editId);
+        console.log('order item to edit ',editedObj)
+        console.log('parent node of order item to edit ',editedObj.parentNode.dataset.column)
+        html.edit.id.dataset.editId = editedObj.dataset.id
+        html.edit.title.value = editedObj.querySelector('[data-order-title]').textContent
+        html.edit.table.value = editedObj.querySelector('[data-order-table]').textContent
+        html.edit.column.value = editedObj.parentNode.dataset.column
+        // console.log(html.edit.id.dataset.editId)
+
+
     } else {
         document.querySelector('.backdrop').style.display = 'none'
         html.edit.overlay.style.display = 'none'
@@ -104,20 +121,46 @@ const handleEditToggle = (event) => {
     // const data = formData.entries()
     // console.log(data['name'])
 }
-const handleEditSubmit = (event) => {}
+const handleEditSubmit = (event) => {
+    event.preventDefault()
 
+    const itemId = html.edit.id.dataset.editId 
+    const editedObj = orders.find(item => item.dataset.id === itemId);
+
+    const formData = new FormData(event.target)
+    formData.set('id', `${itemId}`);
+    
+    const data = Object.fromEntries(formData)
+    //data = {id: 'edit id', title: 'new titl', table: 'new table', column: 'new col'}
+
+    editedObj.querySelector('[data-order-title]').textContent = data.title
+    editedObj.querySelector('[data-order-table]').textContent = data.table
+
+    if(data.column == 'ordered') html.columns.ordered.appendChild(editedObj)
+    if(data.column == 'preparing') html.columns.preparing.appendChild(editedObj)
+    if(data.column == 'served') html.columns.served.appendChild(editedObj)
+
+    event.target.reset()
+    document.querySelector('.backdrop').style.display = 'none'
+    html.edit.overlay.style.display = 'none'
+    
+}
 const handleDelete = (event) => {
     // console.log('delete pressed')
     // console.log(event.target.parentNode.parentNode)
     // console.log(event.srcElement.parentNode.parentNode.querySelector(`[data-edit-id="${html.edit.id.dataset.editId}"]`))
     // html.edit.form.reset()
     // console.log(html.columns.ordered)
-    html.columns.ordered.removeChild(document.querySelector(`[data-id="${html.edit.id.dataset.editId}"]`))
+    const editId = html.edit.id.dataset.editId
+    orders = orders.filter( (item) => {
+        return item.dataset.id !== editId
+    })
+    html.columns.ordered.removeChild(document.querySelector(`[data-id="${editId}"]`))
+
 
     document.querySelector('.backdrop').style.display = 'none'
     html.edit.overlay.style.display = 'none'
 }
-
 const checkOverlayAndFocusBtn = (overlay) => {
     if (overlay.style.display === 'none') {
         html.other.add.focus()
@@ -125,6 +168,11 @@ const checkOverlayAndFocusBtn = (overlay) => {
 }
 
 console.log('hey')
+
+window.onload = () => {
+    html.other.add.focus()
+}
+
 
 html.add.cancel.addEventListener('click', handleAddToggle)
 html.other.add.addEventListener('click', handleAddToggle)
