@@ -125,6 +125,11 @@ export const updateDraggingHtml = (newDragging) => {
     }
 }
 
+/*
+ * @param {object} newDragging 
+ */
+export const updateDraggingFunc = (newDragging) => updateDragging(newDragging)
+
 /**
  * Takes a specific order HTML and clones it into memory. The original HTML
  * element is then removed from the DOM, while the cloned duplicate is added to

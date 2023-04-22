@@ -1,4 +1,4 @@
-import { html, createOrderHtml, updateDraggingHtml, moveToColumn } from "./view.js";
+import { html, createOrderHtml, updateDraggingHtml,updateDraggingFunc, moveToColumn } from "./view.js";
 
 let orders = []
 
@@ -27,14 +27,19 @@ const handleDragOver = (event) => {
     }
 
     if (!column) return
-    updateDragging({ over: column })
+    updateDraggingFunc({ over: column })//updateDragging({ over: column })
     updateDraggingHtml({ over: column })
 }
 
 let isOpen = false
 
-const handleDragStart = (event) => {}
-const handleDragEnd = (event) => {}
+const handleDragStart = (event) => {
+    // handleDragOver(event)
+    console.log('Drag start')
+}
+const handleDragEnd = (event) => {
+    console.log('Drag end')
+}
 const handleHelpToggle = (event) => {
     isOpen = !isOpen
 
