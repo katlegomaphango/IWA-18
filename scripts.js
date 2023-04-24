@@ -27,18 +27,43 @@ const handleDragOver = (event) => {
     }
 
     if (!column) return
-    updateDraggingFunc({ over: column })//updateDragging({ over: column })
+    //updateDragging({ over: column })
     updateDraggingHtml({ over: column })
+    updateDraggingFunc({ over: column })
 }
 
 let isOpen = false
+let sourceCol
 
 const handleDragStart = (event) => {
     // handleDragOver(event)
-    console.log('Drag start')
+    // console.log('Drag start', event.composedPath())
+    // for (let i = 0; i < event.composedPath().length; i++){
+    //     console.log(event.composedPath()[i].dataset)
+    // }
+    // console.log(html.area)
+    // console.log(html.columns)
 }
 const handleDragEnd = (event) => {
-    console.log('Drag end')
+    event.preventDefault()
+    // console.log('Drag end')
+    // console.log('Source', event.srcElement)
+    // console.log('target', event)
+    // console.log(event.toElement.parentNode)
+    // console.log(html.area)
+    // const targetCol = document.querySelector(`[data-id="${event.srcElement.dataset.id}"]`)
+    // console.log(targetCol.parentNode.dataset.column)
+    let elements = document.querySelectorAll(':hover');
+    let column
+    console.log(elements)
+    for (let i = 0; i < elements.length; i++) {
+        console.log(elements[i].dataset.area)
+        if(elements[i].dataset.area) {
+            column = elements[i].dataset.area
+            break
+        }
+    }
+    moveToColumn(event.srcElement.dataset.id, column)
 }
 const handleHelpToggle = (event) => {
     isOpen = !isOpen
