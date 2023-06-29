@@ -12,7 +12,7 @@ All previous HTML, CSS and JavaScript files were created by a senior JavaScript 
 
 Luckily the team is happy with everything that has been created up until now. This means that you will only have to modify the scripts.js file, where most of the event-specific behaviour is located. All event listeners and handlers have been created already. However, only the first handleDragOver handler’s logic has been written and documented. You will be required to add the logic for all remaining event handlers (making use of the data.js and view.js file exports) to 
 
-## ensure that the following user stories are met:
+## Ensure that the following user stories are met:
 
 - [x] The “Add Order” button should start as focused, meaning space/enter can be pressed immediately to add an order.
 - [x] Click the “?” icon should open a “Help” overlay that provides instructions on how to use the app.
