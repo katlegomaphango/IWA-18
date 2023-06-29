@@ -1,8 +1,5 @@
 # KATMAP076_FTO2301_GroupB_KatlegoMaphango_IWA-18
-## IWA_18.4: Challenge 1
-
-
-## Description
+## IWA_18.4: Challenge 1 Description
 In this challenge, you are provided with all HTML, CSS and JavaScript code used in a web app called “Kitchen Express”.
 
 It is a product that will be sold to restaurants to help them track customer orders from the moment they are taken by a waiter until they are finally served to the customer. It also records the table number and the exact time that the order was created.
